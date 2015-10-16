@@ -1,0 +1,25 @@
+# /etc/fail2ban/jail.local
+# SSH Fail2Ban Configuration
+# Enabled for filters sshd and sshd-ddos; 2 failed attempts is a ban for 3 hours
+[ssh]
+enabled = true
+port = ssh
+filter = sshd
+action = iptables-allports
+# mail-whois-lines[name=%(__name__)s, dest=%(destemail)s, logpath=%(logpath)s]
+logpath = /var/log/auth.log
+maxretry = 2
+bantime = 10800
+ignoreip = 192.168.1.0/24
+
+[ssh-ddos]
+enabled = true
+port = ssh
+filter = sshd-ddos
+action = iptables-allports
+logpath = /var/log/auth.log
+maxretry = 1
+Bantime = 86400
+ignoreip = 192.168.1.0/24
+
+# End of Fail2Ban Configuration
